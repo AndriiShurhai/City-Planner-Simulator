@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CityPlannerSimulator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b63ce8c370ec61cd738423f5e3892375a81b24a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b50cbba5693e9a4aa7d46e46a6c067a23e04992")]
 [assembly: System.Reflection.AssemblyProductAttribute("CityPlannerSimulator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CityPlannerSimulator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

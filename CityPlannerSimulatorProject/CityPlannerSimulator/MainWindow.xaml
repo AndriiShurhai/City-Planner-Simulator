@@ -1,8 +1,15 @@
 ﻿<Window x:Class="CityPlannerSimulator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="City Planner Simulator" Height="450" Width="800">
-        <!-- Панель для карти -->
-    <Grid Name="GameMap" Background="LightGreen" Width="480" Height="320">
+        Title="City Planner Simulator" Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="GameMap" 
+                  Width="480" Height="320"
+                  VerticalAlignment="Center" 
+                  HorizontalAlignment="Center">
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>
