@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CityPlannerSimulator.Models
 {
-    internal class Class1
+    internal class Building
     {
     }
 }
