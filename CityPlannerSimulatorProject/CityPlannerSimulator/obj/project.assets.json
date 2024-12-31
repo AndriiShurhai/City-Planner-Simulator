@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\University\\CourseWork\\CityPlannerSimulator\\CityPlannerSimulator\\CityPlannerSimulator.csproj",
+      "projectUniqueName": "F:\\University\\CourseWork\\CityPlannerSimulatorProject\\CityPlannerSimulator\\CityPlannerSimulator.csproj",
       "projectName": "CityPlannerSimulator",
-      "projectPath": "F:\\University\\CourseWork\\CityPlannerSimulator\\CityPlannerSimulator\\CityPlannerSimulator.csproj",
+      "projectPath": "F:\\University\\CourseWork\\CityPlannerSimulatorProject\\CityPlannerSimulator\\CityPlannerSimulator.csproj",
       "packagesPath": "C:\\Users\\it25102024\\.nuget\\packages\\",
-      "outputPath": "F:\\University\\CourseWork\\CityPlannerSimulator\\CityPlannerSimulator\\obj\\",
+      "outputPath": "F:\\University\\CourseWork\\CityPlannerSimulatorProject\\CityPlannerSimulator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\it25102024\\AppData\\Roaming\\NuGet\\NuGet.Config",
