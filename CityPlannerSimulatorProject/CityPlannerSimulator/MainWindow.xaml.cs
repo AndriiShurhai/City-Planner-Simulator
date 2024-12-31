@@ -8,11 +8,12 @@ namespace CityPlannerSimulator
 {
     public partial class MainWindow : Window
     {
-        private const int MapRows = 40;
-        private const int MapColumns = 60;
+        private const int MapRows = 20;
+        private const int MapColumns = 20;
         private const int TileSize = 8;
         private const int TileSpacing = 1;
         private readonly Border[,] mapCells;
+        private Map map = new Map(MapRows, MapColumns);
 
         public MainWindow()
         {

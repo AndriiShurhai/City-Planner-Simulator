@@ -26,7 +26,7 @@ namespace CityPlannerSimulator.Models
 
     public class ResidentialBuilding : Building
     {
-        public ResidentialBuilding() : base("House", 100, (2, 6))
+        public ResidentialBuilding() : base("House", 100, (2, 2))
         {
             TileLayout.Add((0, 0), (12, 3));
             TileLayout.Add((0, 1), (13, 3));
@@ -36,7 +36,57 @@ namespace CityPlannerSimulator.Models
 
         public override bool CanPlace(Map map, int row, int col)
         {
-            throw new NotImplementedException();
+            return map.HasAdjacentRoad(row, col) &&
+                !map.IsNearIndustrial(row, col) &&
+                map.HasSpaceForBuilding(row, col, Size);
+        }
+    }
+
+    public class CommercialBuilding : Building
+    {
+        public CommercialBuilding() : base ("Shop", 200, (2, 2))
+        {
+            TileLayout.Add((0, 0), (12, 3));
+            TileLayout.Add((0, 1), (13, 3));
+            TileLayout.Add((1, 0), (12, 4));
+            TileLayout.Add((1, 1), (13, 4));
+        }
+        public override bool CanPlace(Map map, int row, int col)
+        {
+            return map.HasAdjacentRoad(row, col) &&
+                !map.IsNearIndustrial(row, col) &&
+                map.HasSpaceForBuilding(row, col, Size);
+        }
+    }
+
+    public class IndustrialBuilding : Building
+    {
+        public IndustrialBuilding() : base("Factory", 300, (2, 2))
+        {
+            TileLayout.Add((0, 0), (12, 3));
+            TileLayout.Add((0, 1), (13, 3));
+            TileLayout.Add((1, 0), (12, 4));
+            TileLayout.Add((1, 1), (13, 4));
+        }
+        public override bool CanPlace(Map map, int row, int col)
+        {
+            return map.HasAdjacentRoad(row, col) &&
+                !map.IsNearIndustrial(row, col) &&
+                map.HasSpaceForBuilding(row, col, Size) &&
+                map.IsNearResidential(row, col);
+        }
+    }
+
+    public class Road : Building
+    {
+        public Road() : base("Road", 50, (2, 2))
+        {
+        }
+
+        public override bool CanPlace(Map map, int row, int col)
+        {
+            return map.HasAdjacentRoad(row, col) &&
+                map.HasSpaceForBuilding(row, col, Size);
         }
     }
 }

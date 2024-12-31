@@ -1,11 +1,11 @@
 bin/
 obj/
 
-*.user
-*.vs/
+.user
+.vs/
 
-*.dll
-*.exe
-*.pdb
-*.cache
-*.sourcelink.json
+.dll
+.exe
+.pdb
+.cache
+.sourcelink.json
