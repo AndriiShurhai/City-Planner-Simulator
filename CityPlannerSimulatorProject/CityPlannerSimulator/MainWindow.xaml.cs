@@ -13,6 +13,7 @@ namespace CityPlannerSimulator
         private const int TileSize = 8;
         private const int TileSpacing = 1;
         private readonly Border[,] mapCells;
+        private Building selectedBuilding;
         private Map map = new Map(MapRows, MapColumns);
         private Dictionary<(int X, int Y), ImageBrush> tileCache = new();
 
@@ -68,8 +69,7 @@ namespace CityPlannerSimulator
 
                     int capturedRow = row;
                     int capturedCol = col;
-                    var house = new IndustrialBuilding();
-                    cell.MouseLeftButtonDown += (s, e) => OnCellClick(capturedRow, capturedCol, house);
+                    cell.MouseLeftButtonDown += (s, e) => OnCellClick(capturedRow, capturedCol);
                 }
             }
         }
@@ -103,8 +103,12 @@ namespace CityPlannerSimulator
             }
         }
 
-        private void OnCellClick(int row, int col, Building selectedBuilding)
+        private void OnCellClick(int row, int col)
         {
+            if (selectedBuilding == null)
+            {
+                return;
+            }
 
             if (map.HasSpaceForBuilding(row, col, selectedBuilding.Size))
             {
@@ -113,6 +117,21 @@ namespace CityPlannerSimulator
                     PlaceBuildingOnMap(selectedBuilding, row, col);
                 }
             }
+        }
+
+        private void OnHouseSelected(object sender, RoutedEventArgs e)
+        {
+            selectedBuilding = new ResidentialBuilding();
+        }
+
+        private void OnShopSelected(object sender, RoutedEventArgs e)
+        {
+            selectedBuilding = new CommercialBuilding();
+        }
+
+        private void OnFactorySelected(object sender, RoutedEventArgs e)
+        {
+            selectedBuilding = new IndustrialBuilding();
         }
     }
 }

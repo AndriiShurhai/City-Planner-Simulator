@@ -11,5 +11,11 @@
                   HorizontalAlignment="Center">
             </Grid>
         </ScrollViewer>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
+            <Button Content="House" Click="OnHouseSelected" Margin="5"/>
+            <Button Content="Shop" Click="OnShopSelected" Margin="5"/>
+            <Button Content="Factory" Click="OnFactorySelected" Margin="5"/>
+            <TextBlock Text="{Binding Money, StringFormat='Money: ${0}'}" Margin="20,5,5,5"/>
+        </StackPanel>
     </Grid>
 </Window>

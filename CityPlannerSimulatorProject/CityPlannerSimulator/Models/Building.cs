@@ -152,22 +152,39 @@ public class IndustrialBuilding : Building
             TileLayout.Add((0, 0), (15, 3));
             TileLayout.Add((0, 1), (16, 4));
             TileLayout.Add((0, 2), (17, 3));
+            TileLayout.Add((0, 3), (15, 3));
+            TileLayout.Add((0, 4), (16, 4));
+            TileLayout.Add((0, 5), (17, 3));
 
             TileLayout.Add((1, 0), (15, 5));
             TileLayout.Add((1, 1), (16, 5));
             TileLayout.Add((1, 2), (17, 5));
+            TileLayout.Add((1, 3), (15, 5));
+            TileLayout.Add((1, 4), (16, 5));
+            TileLayout.Add((1, 5), (17, 5));
 
             TileLayout.Add((2, 0), (15, 6));
             TileLayout.Add((2, 1), (16, 6));
             TileLayout.Add((2, 2), (17, 6));
+            TileLayout.Add((2, 3), (15, 6));
+            TileLayout.Add((2, 4), (16, 6));
+            TileLayout.Add((2, 5), (17, 6));
 
             TileLayout.Add((3, 0), (10, 7));
             TileLayout.Add((3, 1), (11, 7));
             TileLayout.Add((3, 2), (12, 7));
+            TileLayout.Add((3, 3), (10, 7));
+            TileLayout.Add((3, 4), (11, 7));
+            TileLayout.Add((3, 5), (12, 7));
 
-            TileLayout.Add((4, 0), (10, 8));
-            TileLayout.Add((4, 1), (11, 8));
-            TileLayout.Add((4, 2), (12, 8));
+            TileLayout.Add((4, 0), (0, 7));
+            TileLayout.Add((4, 1), (1, 7));
+            TileLayout.Add((4, 2), (1, 8));
+            TileLayout.Add((4, 3), (1, 8));
+            TileLayout.Add((4, 4), (0, 7));
+            TileLayout.Add((4, 5), (1, 7));
+
+
         }
         public override bool CanPlace(Map map, int row, int col)
         {
