@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CityPlannerSimulator.Models
 {
@@ -15,6 +10,7 @@ namespace CityPlannerSimulator.Models
         public int Money { get; private set; }
         public int Rows { get; }
         public int Cols { get; }
+
         public Map(int rows, int cols)
         {
             Rows = rows;
@@ -26,12 +22,12 @@ namespace CityPlannerSimulator.Models
 
         public bool HasAdjacentRoad(int row, int col)
         {
-            return CheckAdjacent(row, col, b => b is Road); 
+            return CheckAdjacent(row, col, b => b is Road);
         }
 
         public bool IsNearIndustrial(int row, int col, int radius = 5)
         {
-            return CheckArea(row, col, radius, b => b is IndustrialBuilding); 
+            return CheckArea(row, col, radius, b => b is IndustrialBuilding);
         }
 
         public bool IsNearResidential(int row, int col, int radius = 3)
@@ -39,12 +35,16 @@ namespace CityPlannerSimulator.Models
             return CheckArea(row, col, radius, b => b is ResidentialBuilding);
         }
 
-        public bool isFirstRoad()
+        public bool IsFirstRoad()
         {
+            for (int r = 0; r < Rows; r++)
+                for (int c = 0; c < Cols; c++)
+                    if (buildings[r, c] is Road)
+                        return false;
             return true;
         }
 
-        public bool CheckAdjacent(int row, int col, Func<Building, bool> predicate)
+        private bool CheckAdjacent(int row, int col, Func<Building, bool> predicate)
         {
             int[] dx = { -1, 0, 1, 0 };
             int[] dy = { 0, 1, 0, -1 };
@@ -54,7 +54,8 @@ namespace CityPlannerSimulator.Models
                 int newRow = row + dy[i];
                 int newCol = col + dx[i];
 
-                if (IsValidPosition(newRow, newCol) && buildings[newRow, newCol] != null &&
+                if (IsValidPosition(newRow, newCol) &&
+                    buildings[newRow, newCol] != null &&
                     predicate(buildings[newRow, newCol]))
                 {
                     return true;
@@ -69,7 +70,8 @@ namespace CityPlannerSimulator.Models
             {
                 for (int c = col - radius; c <= col + radius; c++)
                 {
-                    if (IsValidPosition(r, c) && buildings[r, c] != null &&
+                    if (IsValidPosition(r, c) &&
+                        buildings[r, c] != null &&
                         predicate(buildings[r, c]))
                     {
                         return true;
@@ -83,6 +85,7 @@ namespace CityPlannerSimulator.Models
         {
             return row >= 0 && row < Rows && col >= 0 && col < Cols;
         }
+
         public Building GetBuilding(int row, int col)
         {
             return IsValidPosition(row, col) ? buildings[row, col] : null;
@@ -90,9 +93,9 @@ namespace CityPlannerSimulator.Models
 
         public bool HasSpaceForBuilding(int row, int col, (int Width, int Height) size)
         {
-            for (int r = row; r <= row + size.Height; r++)
+            for (int r = row; r < row + size.Height; r++)
             {
-                for (int c = col; c <= col + size.Width; c++)
+                for (int c = col; c < col + size.Width; c++)
                 {
                     if (!IsValidPosition(r, c) || buildings[r, c] != null)
                     {
@@ -110,17 +113,15 @@ namespace CityPlannerSimulator.Models
                 return false;
             }
 
-            foreach(var tile in building.TileLayout)
+            foreach (var tile in building.TileLayout)
             {
                 int tileRow = row + tile.Key.Row;
                 int tileCol = col + tile.Key.Col;
-
-                buildings[tileRow, tileCol] = building; 
+                buildings[tileRow, tileCol] = building;
                 buildingOrigins[tileRow, tileCol] = (row, col);
             }
-           
-            Money -= building.Cost;
 
+            Money -= building.Cost;
             return true;
         }
     }

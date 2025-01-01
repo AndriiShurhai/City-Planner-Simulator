@@ -8,12 +8,13 @@ namespace CityPlannerSimulator
 {
     public partial class MainWindow : Window
     {
-        private const int MapRows = 20;
-        private const int MapColumns = 20;
+        private const int MapRows = 40;
+        private const int MapColumns = 60;
         private const int TileSize = 8;
         private const int TileSpacing = 1;
         private readonly Border[,] mapCells;
         private Map map = new Map(MapRows, MapColumns);
+        private Dictionary<(int X, int Y), ImageBrush> tileCache = new();
 
         public MainWindow()
         {
@@ -21,6 +22,7 @@ namespace CityPlannerSimulator
             mapCells = new Border[MapRows, MapColumns];
             InitializeGrid();
             InitializeMap();
+            LoadTiles("pack://application:,,,/Assets/Tilemap/tilemap.png");
         }
 
         private void InitializeGrid()
@@ -66,14 +68,59 @@ namespace CityPlannerSimulator
 
                     int capturedRow = row;
                     int capturedCol = col;
-                    cell.MouseLeftButtonDown += (s, e) => OnCellClick(capturedRow, capturedCol);
+                    var house = new ResidentialBuilding();
+                    cell.MouseLeftButtonDown += (s, e) => OnCellClick(capturedRow, capturedCol, house);
                 }
             }
         }
 
-        private void OnCellClick(int row, int col)
+        private void LoadTiles(string tilesetPath)
         {
-            mapCells[row, col].Background = GetTile(20, 12);
+            var tileSheet = new BitmapImage(new Uri(tilesetPath, UriKind.RelativeOrAbsolute));
+            for (int y= 0 ; y < 15; y++)
+            {
+                for (int x= 0 ; x < 24; x++)
+                {
+                    var rect = new Int32Rect(
+                        x * (TileSize + TileSpacing),
+                        y * (TileSize + TileSpacing),
+                        TileSize,
+                        TileSize
+                    );
+                    tileCache[(x, y)] = new ImageBrush(new CroppedBitmap(tileSheet, rect));
+                }
+            }
+        }
+
+        public void PlaceBuildingOnMap(Building building, int startRow, int startCol)
+        {
+            foreach (var tile in building.TileLayout)
+            {
+                int row = startRow + tile.Key.Row;
+                int col = startCol + tile.Key.Col;
+                var tileBrush = tileCache[tile.Value];
+                mapCells[row, col].Background = tileBrush;
+            }
+        }
+
+        private void OnCellClick(int row, int col, Building selectedBuilding)
+        {
+
+            if (map.HasSpaceForBuilding(row, col, selectedBuilding.Size))
+            {
+                if (map.TryPlaceBuilding(selectedBuilding, row, col))
+                {
+                    PlaceBuildingOnMap(selectedBuilding, row, col);
+                }
+                else
+                {
+                    MessageBox.Show("Lol2");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lol");
+            }
         }
     }
 }
