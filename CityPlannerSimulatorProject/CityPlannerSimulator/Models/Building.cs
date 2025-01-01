@@ -91,36 +91,88 @@ namespace CityPlannerSimulator.Models
 
     public class CommercialBuilding : Building
     {
-        public CommercialBuilding() : base ("Shop", 200, (2, 2))
+        public CommercialBuilding() : base("Shop", 200, (6, 6))
         {
-            TileLayout.Add((0, 0), (12, 3));
-            TileLayout.Add((0, 1), (13, 3));
-            TileLayout.Add((1, 0), (12, 4));
-            TileLayout.Add((1, 1), (13, 4));
+            TileLayout.Add((0, 0), (18, 4));
+            TileLayout.Add((0, 1), (19, 4));
+            TileLayout.Add((0, 2), (20, 4));
+            TileLayout.Add((0, 3), (18, 4));
+            TileLayout.Add((0, 4), (19, 4));
+            TileLayout.Add((0, 5), (20, 4));
+
+            TileLayout.Add((1, 0), (18, 5));
+            TileLayout.Add((1, 1), (19, 5));
+            TileLayout.Add((1, 2), (20, 5));
+            TileLayout.Add((1, 3), (18, 5));
+            TileLayout.Add((1, 4), (19, 5));
+            TileLayout.Add((1, 5), (20, 5));
+
+            TileLayout.Add((2, 0), (18, 6));
+            TileLayout.Add((2, 1), (19, 6));
+            TileLayout.Add((2, 2), (20, 6));
+            TileLayout.Add((2, 3), (18, 6));
+            TileLayout.Add((2, 4), (19, 6));
+            TileLayout.Add((2, 5), (20, 6));
+
+            TileLayout.Add((3, 0), (5, 7));
+            TileLayout.Add((3, 1), (6, 7));
+            TileLayout.Add((3, 2), (7, 7));
+            TileLayout.Add((3, 3), (5, 7));
+            TileLayout.Add((3, 4), (6, 7));
+            TileLayout.Add((3, 5), (7, 7));
+
+            TileLayout.Add((4, 0), (20, 10));
+            TileLayout.Add((4, 1), (20, 10));
+            TileLayout.Add((4, 2), (20, 10));
+            TileLayout.Add((4, 3), (20, 10));
+            TileLayout.Add((4, 4), (20, 10));
+            TileLayout.Add((4, 5), (20, 10));
+
+            TileLayout.Add((5, 0), (5, 7));
+            TileLayout.Add((5, 1), (6, 7));
+            TileLayout.Add((5, 2), (19, 10));
+            TileLayout.Add((5, 3), (19, 10));
+            TileLayout.Add((5, 4), (6, 7));
+            TileLayout.Add((5, 5), (8, 7));
+
         }
+
         public override bool CanPlace(Map map, int row, int col)
         {
-            return map.HasAdjacentRoad(row, col) &&
+            return //
                 !map.IsNearIndustrial(row, col) &&
                 map.HasSpaceForBuilding(row, col, Size);
         }
     }
 
-    public class IndustrialBuilding : Building
+public class IndustrialBuilding : Building
     {
-        public IndustrialBuilding() : base("Factory", 300, (2, 2))
+        public IndustrialBuilding() : base("Factory", 300, (3, 7))
         {
-            TileLayout.Add((0, 0), (12, 3));
-            TileLayout.Add((0, 1), (13, 3));
-            TileLayout.Add((1, 0), (12, 4));
-            TileLayout.Add((1, 1), (13, 4));
+            TileLayout.Add((0, 0), (15, 3));
+            TileLayout.Add((0, 1), (16, 4));
+            TileLayout.Add((0, 2), (17, 3));
+
+            TileLayout.Add((1, 0), (15, 5));
+            TileLayout.Add((1, 1), (16, 5));
+            TileLayout.Add((1, 2), (17, 5));
+
+            TileLayout.Add((2, 0), (15, 6));
+            TileLayout.Add((2, 1), (16, 6));
+            TileLayout.Add((2, 2), (17, 6));
+
+            TileLayout.Add((3, 0), (10, 7));
+            TileLayout.Add((3, 1), (11, 7));
+            TileLayout.Add((3, 2), (12, 7));
+
+            TileLayout.Add((4, 0), (10, 8));
+            TileLayout.Add((4, 1), (11, 8));
+            TileLayout.Add((4, 2), (12, 8));
         }
         public override bool CanPlace(Map map, int row, int col)
         {
-            return map.HasAdjacentRoad(row, col) &&
-                !map.IsNearIndustrial(row, col) &&
-                map.HasSpaceForBuilding(row, col, Size) &&
-                map.IsNearResidential(row, col);
+            return //
+                map.HasSpaceForBuilding(row, col, Size);
         }
     }
 

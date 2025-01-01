@@ -8,8 +8,8 @@ namespace CityPlannerSimulator
 {
     public partial class MainWindow : Window
     {
-        private const int MapRows = 40;
-        private const int MapColumns = 60;
+        private const int MapRows = 80;
+        private const int MapColumns = 80;
         private const int TileSize = 8;
         private const int TileSpacing = 1;
         private readonly Border[,] mapCells;
@@ -68,7 +68,7 @@ namespace CityPlannerSimulator
 
                     int capturedRow = row;
                     int capturedCol = col;
-                    var house = new ResidentialBuilding();
+                    var house = new IndustrialBuilding();
                     cell.MouseLeftButtonDown += (s, e) => OnCellClick(capturedRow, capturedCol, house);
                 }
             }
@@ -112,14 +112,6 @@ namespace CityPlannerSimulator
                 {
                     PlaceBuildingOnMap(selectedBuilding, row, col);
                 }
-                else
-                {
-                    MessageBox.Show("Lol2");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Lol");
             }
         }
     }
